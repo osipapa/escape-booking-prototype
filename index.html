@@ -364,7 +364,7 @@
         <div class="row" data-add="toll" onclick="toggleAdd(this)">
           <span class="cb"></span>
           <div class="t">
-            <div class="name">Toll Pass</div>
+            <div class="name">Toll Pass<span class="rec">Recommended</span></div>
             <div class="desc">Covers all Bridge and Tunnel tolls incurred in Western and Mountain time zones.<br>Tolls incurred in Central and Eastern time zones will be charged directly.</div>
           </div>
           <span class="price">$15.00</span>
@@ -629,7 +629,7 @@ const stops=[
    text:'Before: three options side by side, including Tire & Windshield, which is not an insurance tier. Now: two options, Escape Damage Cover or your own insurance. Tire & Windshield moved to Protection add-ons.',
    img:'assets/before-extras-top.jpg'},
   {step:1, sel:'[data-add="toll"]', title:'Pre-checked extras',
-   text:'Before: the $21 Toll Pass was checked by default. Now: no paid extra is checked by default. Only the recommended insurance is pre-selected.',
+   text:'Before: the $21 Toll Pass was checked by default, so it reached the total unless the customer spotted it and unchecked it. Now: no paid extra is pre-checked. The Toll Pass keeps a "Recommended" badge instead, so it is still merchandised — the customer just has to say yes to it.',
    img:'assets/before-extras-toll.jpg'},
   {step:2, sel:'#stepper', title:'Steps 3 and 4',
    text:'Before: traveler details and the deposit were separate steps. Now: one screen, using the same embedded Stripe payment box.',
