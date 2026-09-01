@@ -634,15 +634,35 @@ const stops=[
   {step:2, sel:'#stepper', title:'Steps 3 and 4',
    text:'Before: traveler details and the deposit were separate steps. Now: one screen, using the same embedded Stripe payment box.',
    img:'assets/before-payment.png'},
-  {step:2, sel:'.formcard', title:'Form errors',
-   text:'Before: one banner at the top listed every missing field. Now: each field shows its own error.',
+  {step:2, sel:'.formcard', title:'Form errors', demo:'formErrors',
+   text:'Before: one banner at the top listed every missing field. Now: each field shows its own error, in place. The form below is showing two real errors so you can see it.',
    img:'assets/before-details.jpg'}
 ];
 let tourI=-1;
 function startTour(){ if(booked) return; tourI=0; applyStop(); }
+/* the "Form errors" stop puts two real errors on the form, then restores it */
+let demoSaved=null;
+function demoFormErrors(){
+  if(demoSaved) return;
+  demoSaved={};
+  [['ph',''],['em','jamie.miller@gmail']].forEach(([f,v])=>{
+    const fg=document.querySelector('#s2 .fg[data-f="'+f+'"]'), inp=fg.querySelector('input');
+    demoSaved[f]=inp.value; inp.value=v; fg.classList.add('err');
+  });
+}
+function clearDemo(){
+  if(!demoSaved) return;
+  Object.keys(demoSaved).forEach(f=>{
+    const fg=document.querySelector('#s2 .fg[data-f="'+f+'"]');
+    fg.querySelector('input').value=demoSaved[f]; fg.classList.remove('err');
+  });
+  demoSaved=null;
+}
 function applyStop(){
   const s=stops[tourI];
+  clearDemo();
   if(step!==s.step){ step=s.step; show(); }
+  if(s.demo==='formErrors') demoFormErrors();
   document.querySelectorAll('.tour-hl,.tour-hl2').forEach(e=>e.classList.remove('tour-hl','tour-hl2'));
   const ts=document.querySelectorAll(s.sel);
   ts.forEach((t,i)=>t.classList.add(i===0?'tour-hl':'tour-hl2'));
@@ -661,6 +681,7 @@ function tourNext(){ if(tourI>=stops.length-1){ endTour(); return; } tourI++; ap
 function tourPrev(){ if(tourI>0){ tourI--; applyStop(); } }
 function endTour(){
   tourI=-1;
+  clearDemo();
   document.getElementById('tourPanel').classList.remove('open');
   document.querySelectorAll('.tour-hl').forEach(e=>e.classList.remove('tour-hl'));
 }
