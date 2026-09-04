@@ -98,6 +98,7 @@
   /* ── rail ── */
   .rail{position:sticky;top:96px}
   .rail .card{padding:26px}
+  .railin{padding:26px}
   .vansum{display:flex;gap:16px;padding-bottom:22px;border-bottom:1px solid var(--line)}
   .thumb{width:122px;height:92px;border-radius:8px;background:linear-gradient(160deg,#CBD4DE 0%,#9FADBE 60%,#8494A8 100%);flex:none}
   .vansum .vn{font-size:18.5px;font-weight:800}
@@ -139,6 +140,7 @@
   .sp-link{display:flex;gap:8px;align-items:center;font-size:14.5px;font-weight:600;color:#0570DE;margin-bottom:18px;cursor:pointer}
   .sp-row{display:flex;gap:14px;margin-bottom:14px}
   .sp-fg{flex:1;min-width:0}
+  .sp-wide{flex:2}
   .sp-fg label{display:block;font-size:14px;color:#30313D;margin-bottom:6px}
   .sp-input{display:flex;align-items:center;gap:8px;border:1px solid #E0E0E0;border-radius:6px;padding:11px 13px;font-size:15px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04)}
   .visa{margin-left:auto;background:#1434CB;color:#fff;font-size:10px;font-weight:800;font-style:italic;border-radius:3px;padding:3px 6px;letter-spacing:.03em}
@@ -163,7 +165,7 @@
   .btn:hover{filter:brightness(.96)}
 
   /* ── product tour ── */
-  .tourbtn{background:#fff;border:1.5px solid var(--orange);color:var(--orange);border-radius:99px;padding:9px 20px;font-size:13.5px;font-weight:700;white-space:nowrap}
+  .tourbtn{background:#fff;border:1.5px solid var(--orange);color:var(--orange);border-radius:99px;padding:9px 20px;font-size:13.5px;font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
   .tourbtn:hover{background:var(--orange-bg)}
   .tour-hl{outline:3px solid var(--orange);outline-offset:5px;border-radius:12px;animation:hlPulse 1.6s ease infinite;position:relative;z-index:57;box-shadow:0 0 0 9999px rgba(15,23,42,.5);background:#fff}
   .tour-hl2{outline:3px solid var(--orange);outline-offset:5px;border-radius:12px;animation:hlPulse 1.6s ease infinite;position:relative;z-index:57;background:#fff}
@@ -175,19 +177,20 @@
   .screen.active{animation:fadeUp .35s ease}
   .tp-body{animation:fadeUp .3s ease}
   #railTotal.bump,#railDue.bump{display:inline-block;animation:bump .35s ease}
-  .tourpanel{position:fixed;left:24px;bottom:100px;width:430px;max-width:calc(100vw - 48px);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(26,43,73,.22);z-index:60;display:none;overflow:hidden}
-  .tourpanel.open{display:block;animation:panelIn .3s ease}
+  /* desktop: the panel is anchored next to the highlighted element by positionPanel() */
+  .tourpanel{position:fixed;left:24px;bottom:100px;width:430px;max-width:calc(100vw - 48px);max-height:calc(100vh - 120px);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(26,43,73,.22);z-index:60;display:none;flex-direction:column;overflow:hidden}
+  .tourpanel.open{display:flex;animation:panelIn .3s ease}
   .lightbox.open{animation:fadeIn .2s ease}
-  .tp-head{display:flex;align-items:center;gap:8px;padding:13px 18px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .tp-head{flex:none;display:flex;align-items:center;gap:8px;padding:13px 18px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
   .tp-head .x{margin-left:auto;background:none;border:none;color:#fff;font-size:17px;line-height:1;padding:0 2px}
-  .tp-body{padding:16px 18px 14px}
+  .tp-body{padding:16px 18px 14px;overflow:auto;min-height:0}
   .tp-body h4{font-size:16.5px;font-weight:800;margin-bottom:6px}
   .tp-body p{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:12px}
-  .tp-before{border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:zoom-in;position:relative}
-  .tp-before img{width:100%;display:block;max-height:185px;object-fit:cover;object-position:top}
+  .tp-before{border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:zoom-in;position:relative;height:185px}
+  .tp-before img{width:100%;height:100%;display:block;object-fit:cover;object-position:top}
   .tp-before .cap{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:3px 10px;border-radius:99px;text-transform:uppercase}
   .tp-before .zoom{position:absolute;bottom:8px;right:8px;background:rgba(15,23,42,.65);color:#fff;font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px}
-  .tp-foot{display:flex;align-items:center;padding:12px 18px;border-top:1px solid var(--line)}
+  .tp-foot{flex:none;display:flex;align-items:center;padding:12px 18px;border-top:1px solid var(--line)}
   .tp-foot .cnt{font-size:12.5px;color:var(--muted);font-weight:600}
   .tp-foot .nav{margin-left:auto;display:flex;gap:8px}
   .tp-foot .nav button{border-radius:99px;padding:9px 20px;font-size:13.5px;font-weight:700;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
@@ -206,19 +209,98 @@
   .bar-price small{font-size:11.5px;color:var(--muted);font-weight:600;white-space:nowrap}
   .backdrop{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:54;opacity:0;pointer-events:none;transition:opacity .25s ease}
   .backdrop.open{opacity:1;pointer-events:auto}
+
+  /* ── 14" laptops (short viewport): tighter vertical rhythm so the first van's price is above the fold ── */
+  @media(min-width:1001px) and (max-height:900px){
+    .head-in{height:64px}
+    .wrap{padding-top:26px}
+    h1{font-size:29px;margin-bottom:18px}
+    .trip{padding:16px 22px;margin-bottom:16px}
+    .banner{padding:12px 16px;margin-bottom:24px}
+    .vanphoto{height:170px}
+    .van .body{padding:20px 24px}
+    .rail{top:86px}
+    .ctabar .in{padding:14px 60px}
+    .btn{padding:15px 32px}
+    body{padding-bottom:100px}
+  }
+
+  /* ── tablet / mobile ── */
   @media(max-width:1000px){
-    .wrap{grid-template-columns:1fr;gap:30px;padding:24px 20px 0}
+    .wrap{grid-template-columns:minmax(0,1fr);gap:30px;padding:24px 20px 0}
+    main{min-width:0}
     .stepper{gap:14px}
     .step{font-size:13px}
     .trip{flex-direction:column;gap:14px}
     .frow{grid-template-columns:1fr}
     .ctabar .in{padding:12px 16px;justify-content:space-between;gap:12px}
     .bar-price{display:flex}
+    .btn{white-space:nowrap}
     .rail{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:56;transform:translateY(105%);transition:transform .32s ease;max-height:72vh;overflow:auto;border-radius:16px 16px 0 0;background:#fff;box-shadow:0 -10px 40px rgba(26,43,73,.25)}
     .rail.open{transform:translateY(0)}
-    .rail > .card{border:none;border-radius:0}
+    .rail > .card{border:none;border-radius:0;padding:0}
+    .railin{padding:20px 22px 28px}
     .rail::before{content:"";display:block;width:44px;height:4px;border-radius:99px;background:#D9D9D6;margin:10px auto 0}
-    .tourpanel{left:12px;right:12px;width:auto;bottom:84px}
+    /* while the walkthrough is open: room to scroll any target above the panel */
+    body.tour-on{padding-bottom:70vh}
+    /* stop 1 on mobile: the sheet is open and the panel is docked at the top */
+    body.tour-sheet .rail{max-height:min(56vh,calc(100vh - 300px))}
+    .rail .tour-hl2{outline-offset:-4px;border-radius:0}
+    /* the walkthrough panel becomes a bottom sheet */
+    .tourpanel{left:0;right:0;top:auto;bottom:0;width:auto;max-width:none;max-height:60vh;border-radius:16px 16px 0 0;border-left:0;border-right:0;border-bottom:0;box-shadow:0 -10px 40px rgba(26,43,73,.25)}
+    .tourpanel.dock-top{top:0;bottom:auto;border-radius:0 0 16px 16px;border-top:0;border-bottom:1px solid var(--line);box-shadow:0 10px 40px rgba(26,43,73,.25)}
+    .tp-head{padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top))}
+    .tp-body{padding:14px 16px 12px}
+    .tp-body h4{font-size:15.5px}
+    .tp-body p{font-size:13px;line-height:1.55;margin-bottom:10px}
+    .tp-before{display:flex;align-items:center;gap:12px;height:auto;padding:7px 12px 7px 7px;cursor:pointer}
+    .tp-before img{width:64px;height:48px;border-radius:5px;flex:none}
+    .tp-before .cap{position:static;font-size:10.5px}
+    .tp-before .zoom{position:static;margin-left:auto;background:none;color:var(--orange);font-weight:700;font-size:12.5px;padding:0}
+    .tp-foot{padding:10px 16px;padding-bottom:max(10px,env(safe-area-inset-bottom))}
+    .tp-foot .nav button{padding:10px 20px;font-size:14px}
+    .lightbox{padding:12px}
+  }
+
+  /* ── phones ── */
+  @media(max-width:640px){
+    .head-in{padding:0 14px;height:60px;gap:8px}
+    .back{font-size:14px;gap:6px}
+    .stepper{gap:8px}
+    .step{gap:6px;font-size:13px;white-space:nowrap}
+    .step .n{width:25px;height:25px;font-size:12px}
+    .step:not(.now) .lbl{display:none}
+    .tourbtn{padding:0;width:36px;height:36px;justify-content:center;font-size:12px}
+    .tourbtn .tb-l{display:none}
+    .wrap{padding:20px 16px 0}
+    h1{font-size:26px;margin-bottom:18px}
+    .trip{padding:16px 18px;gap:12px}
+    .trip>span{font-size:14.5px}
+    .banner{padding:12px 14px;font-size:14px;margin-bottom:24px}
+    .rule{margin:24px 0 22px}
+    .sec h2{font-size:19px}
+    .vanphoto{height:160px}
+    .van .body{flex-direction:column;gap:12px;padding:18px 18px 20px}
+    .van h3{font-size:19px}
+    .van .vprice{margin-left:0;text-align:left;white-space:normal;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+    .van .vprice .big{font-size:20px}
+    .van .vprice .per{margin-top:0}
+    .navail,.nextpill{margin-bottom:0}
+    .opt{padding:16px;gap:12px}
+    .row{padding:16px 0;gap:12px}
+    .opt .name,.row .name,.opt .price,.row .price{font-size:15.5px}
+    .rec{margin-left:8px;padding:4px 9px;font-size:11.5px}
+    .formcard,.depbox{padding:20px 18px}
+    .depbox h2{font-size:19px}
+    .sp-tabs{overflow-x:auto;scrollbar-width:none;margin:0 -18px 16px;padding:2px 18px}
+    .sp-tabs::-webkit-scrollbar{display:none}
+    .sp-tab{flex:0 0 auto;min-width:92px}
+    .sp-row{flex-wrap:wrap;gap:12px}
+    .sp-fg{flex:1 1 calc(50% - 6px)}
+    .sp-wide{flex:1 1 100%}
+    .ctabar .in{padding:10px 14px}
+    .btn{padding:14px 22px;font-size:15px}
+    .success{padding:44px 20px}
   }
 </style>
 </head>
@@ -231,11 +313,11 @@
       Back
     </button>
     <div class="stepper" id="stepper">
-      <button class="step now" onclick="jump(0)"><span class="n">1</span> Van</button>
-      <button class="step" onclick="jump(1)"><span class="n">2</span> Extras</button>
-      <button class="step" onclick="jump(2)"><span class="n">3</span> Details &amp; payment</button>
+      <button class="step now" onclick="jump(0)"><span class="n">1</span><span class="lbl">Van</span></button>
+      <button class="step" onclick="jump(1)"><span class="n">2</span><span class="lbl">Extras</span></button>
+      <button class="step" onclick="jump(2)"><span class="n">3</span><span class="lbl">Details &amp; payment</span></button>
     </div>
-    <button class="tourbtn" onclick="startTour()">▶ What changed</button>
+    <button class="tourbtn" onclick="startTour()" aria-label="What changed">▶<span class="tb-l">What changed</span></button>
   </div>
 </header>
 
@@ -423,7 +505,7 @@
             </div>
             <div class="sp-link">🔒 <span>Secure, fast checkout with Link</span> ⌄</div>
             <div class="sp-row">
-              <div class="sp-fg" style="flex:2">
+              <div class="sp-fg sp-wide">
                 <label>Card number</label>
                 <div class="sp-input">4242 4242 4242 4242 <span class="visa">VISA</span></div>
               </div>
@@ -450,7 +532,7 @@
   <!-- ═══ RAIL ═══ -->
   <aside class="rail">
     <div class="card">
-      <div style="padding:26px">
+      <div class="railin">
         <div class="vansum">
           <div class="thumb"></div>
           <div>
@@ -487,7 +569,7 @@
     <div class="tp-before" onclick="openLb()">
       <span class="cap">Before: live site</span>
       <img id="tpImg" alt="Original version">
-      <span class="zoom">Click to enlarge</span>
+      <span class="zoom">View full size</span>
     </div>
   </div>
   <div class="tp-foot">
@@ -549,7 +631,7 @@ function render(){
   document.getElementById('barDue').textContent=money(due);
   document.getElementById('railBal').textContent=money(bal);
   document.querySelectorAll('.dueTxt').forEach(e=>e.textContent=money(due));
-  if(step===2) document.getElementById('cta').textContent='Pay '+money(due)+' deposit';
+  if(step===2) document.getElementById('cta').textContent=ctaLabel();
 }
 function toggleVd(btn){
   const b=btn.nextElementSibling;
@@ -589,6 +671,10 @@ document.querySelectorAll('#s2 .fg[data-f] input').forEach(inp=>{
 });
 
 const ctaText=['Continue to extras','Continue to details & payment',''];
+const ctaShort=['Continue','Continue to payment',''];
+const isMobile=()=>matchMedia('(max-width:1000px)').matches;
+const isPhone=()=>matchMedia('(max-width:640px)').matches;
+function ctaLabel(){ return step===2 ? 'Pay '+money(totals().due)+' deposit' : (isPhone()?ctaShort:ctaText)[step]; }
 function show(){
   document.querySelectorAll('.screen').forEach((s,i)=>s.classList.toggle('active',i===step));
   document.querySelectorAll('#stepper .step').forEach((s,i)=>{
@@ -596,8 +682,9 @@ function show(){
     s.classList.toggle('done',i<step);
     s.querySelector('.n').textContent = i<step ? '✓' : i+1;
   });
-  document.getElementById('cta').textContent = step===2 ? 'Pay '+money(totals().due)+' deposit' : ctaText[step];
+  document.getElementById('cta').textContent = ctaLabel();
   render();
+  cancelAnimationFrame(scrollAnim); clearTimeout(scrollDone);
   window.scrollTo({top:0});
 }
 function jump(i){
@@ -619,7 +706,7 @@ function prev(){ if(step>0 && !booked){step--; show();} }
 
 /* ── product tour ── */
 const stops=[
-  {step:0, sel:'.rail > .card', title:'Always visible price summary on the sidebar',
+  {step:0, sel:'.rail > .card', title:'Always visible price summary on the sidebar', mobileSheet:true,
    text:'Before: the $79 cleaning fee and the full price breakdown only appeared at the last step. Now: the summary is on every screen, the cleaning fee is included from the start, and it updates when a selection changes.',
    img:'assets/before-details.jpg'},
   {step:0, sel:'.van.soldout', title:'Unavailable vans show suggested times',
@@ -631,7 +718,7 @@ const stops=[
   {step:1, sel:'[data-add="toll"]', title:'Pre-checked extras',
    text:'Before: the $21 Toll Pass was checked by default, so it reached the total unless the customer spotted it and unchecked it. Now: no paid extra is pre-checked. The Toll Pass keeps a "Recommended" badge instead, so it is still merchandised — the customer just has to say yes to it.',
    img:'assets/before-extras-toll.jpg'},
-  {step:2, sel:'#stepper', title:'Steps 3 and 4',
+  {step:2, sel:'#stepper', title:'Steps 3 and 4', place:'below',
    text:'Before: traveler details and the deposit were separate steps. Now: one screen, using the same embedded Stripe payment box.',
    img:'assets/before-payment.png'},
   {step:2, sel:'.formcard', title:'Form errors', demo:'formErrors',
@@ -639,6 +726,7 @@ const stops=[
    img:'assets/before-details.jpg'}
 ];
 let tourI=-1;
+const $panel=()=>document.getElementById('tourPanel');
 function startTour(){ if(booked) return; tourI=0; applyStop(); }
 /* the "Form errors" stop puts two real errors on the form, then restores it */
 let demoSaved=null;
@@ -658,41 +746,110 @@ function clearDemo(){
   });
   demoSaved=null;
 }
+function tourTarget(){ const s=stops[tourI]; return s ? document.querySelector(s.sel.split(',')[0].trim()) : null; }
+/* desktop: put the panel beside the highlighted element (right, else left, else below), clamped
+   between the header and the bottom bar. Re-run on scroll so it follows its target. */
+function positionPanel(){
+  const p=$panel(), s=stops[tourI], t=tourTarget();
+  if(!p.classList.contains('open') || !t) return;
+  if(isMobile()){ p.style.left=p.style.top=p.style.bottom=''; return; }
+  const r=t.getBoundingClientRect(), vw=innerWidth, vh=innerHeight, pw=p.offsetWidth, ph=p.offsetHeight;
+  const headH=document.querySelector('header').offsetHeight, barH=document.querySelector('.ctabar').offsetHeight;
+  const M=16, G=22;
+  let left, top;
+  if(s.place==='below'){ left=r.left+r.width/2-pw/2; top=r.bottom+G; }
+  else if(r.right+G+pw<=vw-M){ left=r.right+G; top=r.top; }
+  else if(r.left-G-pw>=M){ left=r.left-G-pw; top=r.top; }
+  else { left=24; top=vh-barH-ph-12; }
+  left=Math.max(M,Math.min(left,vw-pw-M));
+  top=Math.max(headH+12,Math.min(top,vh-barH-ph-12));
+  p.style.left=left+'px'; p.style.top=top+'px'; p.style.bottom='auto';
+}
+/* our own scroll tween: the browser's smooth scrollIntoView is cancelled too easily */
+let scrollAnim=null, scrollDone=null;
+function smoothScrollTo(y){
+  cancelAnimationFrame(scrollAnim); clearTimeout(scrollDone);
+  const max=document.documentElement.scrollHeight-innerHeight;
+  const to=Math.max(0,Math.min(y,max)), from=scrollY, d=to-from;
+  if(Math.abs(d)<2){ positionPanel(); return; }
+  const dur=Math.min(650, 260+Math.abs(d)*.3), t0=performance.now();
+  const finish=()=>{ cancelAnimationFrame(scrollAnim); clearTimeout(scrollDone); window.scrollTo(0,to); positionPanel(); };
+  const tick=now=>{
+    const k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);
+    window.scrollTo(0,from+d*e);
+    if(k<1) scrollAnim=requestAnimationFrame(tick); else finish();
+  };
+  scrollAnim=requestAnimationFrame(tick);
+  scrollDone=setTimeout(finish,dur+120);   /* lands even if frames are throttled */
+}
+/* scroll the target into the free area: desktop = between header and bottom bar,
+   mobile = between header and the bottom-docked panel */
+function scrollToTarget(t){
+  const headH=document.querySelector('header').offsetHeight;
+  const bottomH = isMobile() ? $panel().offsetHeight : document.querySelector('.ctabar').offsetHeight;
+  const r=t.getBoundingClientRect();
+  const free=innerHeight-bottomH-headH;
+  const want = r.height+24>free ? headH+12 : headH+(free-r.height)/2;
+  smoothScrollTo(scrollY+r.top-want);
+}
 function applyStop(){
-  const s=stops[tourI];
+  const s=stops[tourI], p=$panel(), mobile=isMobile();
   clearDemo();
   if(step!==s.step){ step=s.step; show(); }
   if(s.demo==='formErrors') demoFormErrors();
   document.querySelectorAll('.tour-hl,.tour-hl2').forEach(e=>e.classList.remove('tour-hl','tour-hl2'));
+  /* on mobile the price summary lives in a bottom sheet: open it and dock the panel at the top */
+  const sheetMode = mobile && !!s.mobileSheet;
+  setSheet(sheetMode);
+  document.body.classList.add('tour-on');
+  document.body.classList.toggle('tour-sheet', sheetMode);
+  p.classList.toggle('dock-top', sheetMode);
   const ts=document.querySelectorAll(s.sel);
-  ts.forEach((t,i)=>t.classList.add(i===0?'tour-hl':'tour-hl2'));
-  if(ts[0]) setTimeout(()=>ts[0].scrollIntoView({block:'center',behavior:'smooth'}),80);
-  document.getElementById('tourPanel').classList.add('open');
-  const tb=document.querySelector('.tp-body');
-  tb.style.animation='none'; void tb.offsetHeight; tb.style.animation='';
+  ts.forEach((t,i)=>t.classList.add(i===0 && !sheetMode ? 'tour-hl' : 'tour-hl2'));
   document.getElementById('tpTitle').textContent=s.title;
   document.getElementById('tpText').textContent=s.text;
   document.getElementById('tpImg').src=s.img;
   document.getElementById('tpCnt').textContent=(tourI+1)+' of '+stops.length;
   document.getElementById('tpPrev').disabled = tourI===0;
   document.getElementById('tpNext').textContent = tourI===stops.length-1 ? 'Finish' : 'Next';
+  p.classList.add('open');
+  p.style.left=p.style.top=p.style.bottom='';
+  const tb=document.querySelector('.tp-body');
+  tb.scrollTop=0; tb.style.animation='none'; void tb.offsetHeight; tb.style.animation='';
+  const t=ts[0];
+  if(!t) return;
+  positionPanel();
+  if(!sheetMode) setTimeout(()=>scrollToTarget(t),60);
 }
 function tourNext(){ if(tourI>=stops.length-1){ endTour(); return; } tourI++; applyStop(); }
 function tourPrev(){ if(tourI>0){ tourI--; applyStop(); } }
 function endTour(){
   tourI=-1;
   clearDemo();
-  document.getElementById('tourPanel').classList.remove('open');
-  document.querySelectorAll('.tour-hl').forEach(e=>e.classList.remove('tour-hl'));
+  const p=$panel();
+  p.classList.remove('open','dock-top'); p.style.left=p.style.top=p.style.bottom='';
+  document.querySelectorAll('.tour-hl,.tour-hl2').forEach(e=>e.classList.remove('tour-hl','tour-hl2'));
+  if(document.body.classList.contains('tour-sheet')) setSheet(false);
+  document.body.classList.remove('tour-on','tour-sheet');
+}
+function setSheet(open){
+  document.querySelector('.rail').classList.toggle('open',open);
+  document.getElementById('backdrop').classList.toggle('open',open);
 }
 function toggleSheet(){
-  document.querySelector('.rail').classList.toggle('open');
-  document.getElementById('backdrop').classList.toggle('open');
+  if(document.body.classList.contains('tour-sheet')) return;
+  setSheet(!document.querySelector('.rail').classList.contains('open'));
 }
 function openLb(){
   document.getElementById('lbImg').src=document.getElementById('tpImg').src;
   document.getElementById('lightbox').classList.add('open');
 }
+addEventListener('scroll',()=>{ if(tourI>=0) positionPanel(); },{passive:true});
+let rzT;
+addEventListener('resize',()=>{
+  clearTimeout(rzT);
+  rzT=setTimeout(()=>{ document.getElementById('cta').textContent=ctaLabel(); if(tourI>=0) applyStop(); },150);
+});
 render(); show();
 setTimeout(startTour, 500);
 </script>
